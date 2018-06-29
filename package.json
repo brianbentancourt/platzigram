@@ -1,7 +1,7 @@
 {
   "name": "platzigram",
   "version": "1.0.0",
-  "description": "compartir memes entre usuarios",
+  "description": "red social",
   "main": "server.js",
   "author": "Brian Bentancourt",
   "license": "MIT",
