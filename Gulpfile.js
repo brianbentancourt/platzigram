@@ -1,27 +1,27 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var rename = require('gulp-rename');
-var babel = require('babelify');
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
-var watchify = require('watchify');
+var gulp = require('gulp')
+var sass = require('gulp-sass')
+var rename = require('gulp-rename')
+var babel = require('babelify')
+var browserify = require('browserify')
+var source = require('vinyl-source-stream')
+var watchify = require('watchify')
 
 gulp.task('styles', function () {
   gulp
     .src('index.scss')
     .pipe(sass())
     .pipe(rename('app.css'))
-    .pipe(gulp.dest('public'));
+    .pipe(gulp.dest('public'))
 })
 
 gulp.task('assets', function () {
   gulp
     .src('assets/*')
-    .pipe(gulp.dest('public'));
+    .pipe(gulp.dest('public'))
 })
 
 function compile(watch) { // watchify escucha por cambios en archivos y automaticamente ejecuta el recompile
-  var bundle = watchify(browserify('./src/index.js', {debug: true}));
+  var bundle = watchify(browserify('./src/index.js', {debug: true}))
 
   function rebundle() {
     bundle
@@ -29,23 +29,23 @@ function compile(watch) { // watchify escucha por cambios en archivos y automati
       .bundle()
       .pipe(source('index.js'))
       .pipe(rename('app.js'))
-      .pipe(gulp.dest('public'));
+      .pipe(gulp.dest('public'))
   }
 
   if (watch) { // cuando recibe cambios vuelve a generar
     bundle.on('update', function () {
-      console.log('--> Bundling...');
-      rebundle();
-    });
+      console.log('--> Bundling...')
+      rebundle()
+    })
   }
 
-  rebundle();
+  rebundle()
 }
 
 gulp.task('build', function () {
-  return compile();
+  return compile()
 });
 
-gulp.task('watch', function () { return compile(true); });
+gulp.task('watch', function () { return compile(true) })
 
-gulp.task('default', ['styles', 'assets', 'build']);
+gulp.task('default', ['styles', 'assets', 'build'])
