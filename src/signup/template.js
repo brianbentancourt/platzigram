@@ -1,13 +1,7 @@
 const yo = require('yo-yo')
+const landing = require('../landing')
 
-module.exports = yo`<div class="container">
-	<div class="row">
-	  <div class="col s10 push-s1">
-		<div class="row">
-		  <div class="col m5 hide-on-small-only">
-			<img class="iphone" src="./iphone.png" />
-		  </div>
-		  <div class="col s12 m7">
+const signup = yo`<div class="col s12 m7">
 			<div class="row">
 			  <div class="signup-box">
 				<h1 class="platzigram">Platzigram</h1>
@@ -33,8 +27,6 @@ module.exports = yo`<div class="container">
 				¿Tienes una cuenta? <a href="/signin">Entrar</a>
 			  </div>
 			</div>
-		  </div>
-		</div>
-	  </div>
-	</div>
-  </div>`
+			</div>`
+			
+module.exports = landing(signup)

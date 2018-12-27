@@ -27,6 +27,10 @@ function compile(watch) { // watchify escucha por cambios en archivos y automati
     bundle
       .transform(babel)
       .bundle()
+      .on('error', err => { 
+        console.error(err)
+        this.emit('end')
+      })
       .pipe(source('index.js'))
       .pipe(rename('app.js'))
       .pipe(gulp.dest('public'))
