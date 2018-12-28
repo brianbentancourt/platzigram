@@ -15,7 +15,8 @@ page('/', function(ctx, next){
             },
             url:'https://materializecss.com/images/office.jpg',
             likes: 4654,
-            liked: true
+            liked: true,
+            createdAt: new Date()
         },
         {
             user:{
@@ -24,7 +25,8 @@ page('/', function(ctx, next){
             },
             url:'http://oi41.tinypic.com/5piw7o.jpg',
             likes: 2456,
-            liked: false
+            liked: false,
+            createdAt: new Date().setDate(new Date().getDate() -10)
         }
      ]
 

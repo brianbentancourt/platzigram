@@ -1,4 +1,6 @@
 const yo = require('yo-yo')
+const moment = require('moment')
+
 
 module.exports = pic => {
     let el
@@ -15,7 +17,7 @@ module.exports = pic => {
                     <span class="username"> ${picture.user.username}</span>
                 </a>
                 <p>
-                    <small class="right time"> Hace 1 dia </small>
+                    <small class="right time">${moment(picture.createdAt).fromNow()}</small>
                     <a class="left" onclick=${like.bind(null, true)}>
                         <i class="fa fa-heart-o" ></i>
                     </a>
