@@ -6,6 +6,7 @@
   "author": "Brian Bentancourt",
   "license": "MIT",
   "dependencies": {
+    "empty-element": "^1.0.0",
     "express": "^4.16.3",
     "intl": "^1.2.5",
     "intl-messageformat": "^2.2.0",
@@ -13,6 +14,7 @@
     "materialize-css": "^0.100.2",
     "page": "^1.8.6",
     "pug": "^2.0.3",
+    "superagent": "^4.1.0",
     "title": "^3.4.0",
     "yo-yo": "^1.4.1"
   },

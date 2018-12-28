@@ -1,34 +1,27 @@
 const page = require('page')
+const empty = require('empty-element')
 const title = require('title')
 const home = require('./template')
+const request = require('superagent')
+const header = require('../header')
 
 const main = document.getElementById('main-container')
 
-page('/', function(ctx, next){
+function loadPictures(ctx, next){
+    request
+        .get('/api/pictures')
+        .end((err, res) => {
+            if(err) return console.error(err)
+            console.log(res.body)
+            ctx.pictures = res.body // con context (ctx) podemos compartir datos a traves de los middleware 
+            next()
+        })
+}
+
+page('/', header, loadPictures, (ctx, next) =>{
     title('Platzigram')
 
-    const pictures = [ 
-        {
-            user:{
-                username: 'persona',
-                avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Gnome-stock_person.svg/1024px-Gnome-stock_person.svg.png'
-            },
-            url:'https://materializecss.com/images/office.jpg',
-            likes: 1,
-            liked: true,
-            createdAt: new Date()
-        },
-        {
-            user:{
-                username: 'persona2',
-                avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrHupn-XlRYsE46-K8HW8UFD1xHjoYSuiSDWVX4k5xHFMvo9nc'
-            },
-            url:'http://oi41.tinypic.com/5piw7o.jpg',
-            likes: 0,
-            liked: false,
-            createdAt: new Date().setDate(new Date().getDate() -10)
-        }
-     ]
-
-    main.appendChild(home(pictures))
+    
+    empty(main).appendChild(home(ctx.pictures))
 })
+

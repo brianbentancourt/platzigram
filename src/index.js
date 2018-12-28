@@ -3,6 +3,7 @@ const page = require('page')
 //require('moment/locale/es')
 //moment.locale('es')
 
+require('./header')
 require('./home')
 require('./signup')
 require('./signin')
