@@ -17,13 +17,13 @@ const Messages = {}
 Messages.es = es
 Messages['en-US'] = en
 
-const locale = 'en-US'
+const locale = localStorage.locale || 'es'
 
 
 module.exports = {
     message: (text, options) =>{
         options = options || {} //si es null le carga un objeto vacío
-        const msg = new IntlMessageFormat(Messages[locale].likes, locale)
+        const msg = new IntlMessageFormat(Messages[locale][text], locale)
         return msg.format(options)
     },
     date: new IntlRelativeFormat(locale)
