@@ -24,7 +24,7 @@ page('/', function(ctx, next){
             },
             url:'http://oi41.tinypic.com/5piw7o.jpg',
             likes: 2456,
-            liked: true
+            liked: false
         }
      ]
 
