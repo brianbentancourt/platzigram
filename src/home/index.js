@@ -45,8 +45,17 @@ function loadPictures(ctx, next){
         .catch(err => console.error(err))
 }
 
+async function asyncLoad(ctx, next){
+    try{
+        ctx.pictures = await fetch('/api/pictures').then(res => res.json)
+        next()
+    }catch(err){
+        return console.error(err)
+    }
+}
 
-page('/', header, loadPictures, (ctx, next) =>{
+
+page('/', header, asyncLoad, (ctx, next) =>{
     title('Platzigram')
     empty(main).appendChild(home(ctx.pictures))
 })
