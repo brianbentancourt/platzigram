@@ -3,7 +3,7 @@ const empty = require('empty-element')
 const title = require('title')
 const home = require('./template')
 //const request = require('superagent')
-const axios = require('axios')
+//const axios = require('axios')
 const header = require('../header')
 
 const main = document.getElementById('main-container')
@@ -20,12 +20,26 @@ const main = document.getElementById('main-container')
 //         })
 // }
 
-// usando con promesas de axios
+// // usando con promesas de axios
+// function loadPictures(ctx, next){
+//     axios
+//         .get('/api/pictures')
+//         .then(res => {
+//             ctx.pictures = res.data  
+//             next()
+//         })
+//         .catch(err => console.error(err))
+// }
+
+
+// usando metodo nativo del navegador: fetch
 function loadPictures(ctx, next){
-    axios
-        .get('/api/pictures')
-        .then(res => {
-            ctx.pictures = res.data  
+    fetch('/api/pictures')
+        .then(res =>{
+            return res.json()
+        })
+        .then(pictures => {
+            ctx.pictures = pictures
             next()
         })
         .catch(err => console.error(err))
