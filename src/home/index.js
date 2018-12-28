@@ -47,7 +47,7 @@ function loadPictures(ctx, next){
 
 async function asyncLoad(ctx, next){
     try{
-        ctx.pictures = await fetch('/api/pictures').then(res => res.json)
+        ctx.pictures = await fetch('/api/pictures').then(res => res.json())
         next()
     }catch(err){
         return console.error(err)

@@ -1,5 +1,5 @@
 window.IntlRelativeFormat = require('intl-relativeformat')
-window.IntlMessageFormat = require('intl-messageFormat')
+window.IntlMessageFormat = require('intl-messageformat')
 
 require('intl-relativeformat/dist/locale-data/en.js')
 require('intl-relativeformat/dist/locale-data/es.js')
