@@ -7,6 +7,7 @@ require('./header')
 require('./home')
 require('./signup')
 require('./signin')
+require('./profile')
 require('./footer')
 
 page()

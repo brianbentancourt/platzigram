@@ -5,6 +5,7 @@ const home = require('./template')
 //const request = require('superagent')
 //const axios = require('axios')
 const header = require('../header')
+const spinner = require('../spinner')
 
 const main = document.getElementById('main-container')
 
@@ -47,6 +48,7 @@ function loadPictures(ctx, next){
 
 async function asyncLoad(ctx, next){
     try{
+        empty(main).appendChild(spinner)
         ctx.pictures = await fetch('/api/pictures').then(res => res.json())
         next()
     }catch(err){

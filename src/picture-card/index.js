@@ -13,7 +13,7 @@ module.exports = pic => {
                 <img class="activator" src="${picture.url}">
             </div>
             <div class="card-content">
-                <a class="card-title activator grey-text text-darken-4">
+                <a href="/profile/${picture.user.username}" class="card-title activator grey-text text-darken-4">
                     <img class="avatar" src="${picture.user.avatar}" >
                     <span class="username"> ${picture.user.username}</span>
                 </a>
