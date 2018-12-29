@@ -1,11 +1,24 @@
-var express = require('express');
+const express = require('express')
+const multer = require('multer')
+const ext = require('file-extension')
 
-var app = express();
+const storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+	  cb(null, './uploads/')
+	},
+	filename: function (req, file, cb) {
+	  cb(null, Date.now() + '.' + ext(file.originalname))
+	}
+  })
+   
+let upload = multer({ storage: storage }).single('picture')
+
+var app = express()
 var port = process.env.PORT || 3000
 
-app.set('view engine', 'pug');
+app.set('view engine', 'pug')
 
-app.use(express.static('public'));
+app.use(express.static('public'))
 
 
 ////verifico si el usuario esta logueado antes de permitir ingresar al home
@@ -19,7 +32,7 @@ app.use(express.static('public'));
 // })
 
 app.get('/', function (req, res) {
-	res.render('index', { title: 'Platzigram' });
+	res.render('index', { title: 'Platzigram' })
 })
 
 app.get('/signup', function (req, res) {
@@ -68,6 +81,14 @@ app.get('/api/pictures', function (req, res) {
 		res.send(pictures)
 	}, 3000)
 
+})
+
+app.post('/api/pictures', (req, res) =>{
+	upload(req, res, function (err){
+		if(err) return res.status(500).send( "Error uploading file")
+
+		res.send('File uploaded')
+	})
 })
 
 app.listen(port, function (err) {

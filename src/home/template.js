@@ -2,6 +2,7 @@ const yo = require('yo-yo')
 const layout = require('../layout')
 const picture = require('../picture-card')
 const translate = require('../translate').message
+const request = require('superagent')
 
 const toggleButtons = () =>{
     document.getElementById('fileName').classList.toggle('hide')
@@ -18,12 +19,28 @@ const cancel = e =>{
     document.getElementById('formUpload').reset()
 }
 
+function onsubmit(e){
+    e.preventDefault()
+    let data = new FormData(this)
+    request
+        .post('/api/pictures')
+        .send(data)
+        .end((err,res) =>{
+            if(err) console.error(err)
+            if(res){
+                toggleButtons()
+                document.getElementById('formUpload').reset()
+            }
+            //console.log(arguments)
+        })
+}
+
 module.exports = pictures => {
     let el = yo`
     <div class="container timeline"> 
         <div class="row">
             <div class="col s12 m10 offset-m1 l8 offset-l2 center-align">
-                <form id="formUpload" enctype="multipart/form-data" class="form-upload">
+                <form id="formUpload" onsubmit=${onsubmit} enctype="multipart/form-data" class="form-upload">
                     <div id="fileName" class="fileUpload btn btn-flat cyan ">
                         <span><i class="fa fa-camera"></i> ${translate('upload-picture')}</span>
                         <input name="picture" id="file" type="file" class="upload" onchange=${onchange} />
